@@ -17,7 +17,8 @@ public class RadExp implements PlayerBot
 		char go[] = new char[4];
 		
 		for (Coordinates c : universeView.getMyCells()) {
-			mine = troops = universeView.getPopulation(c);
+			mine = universeView.getPopulation(c);
+			troops = mine;
 			
 			/* Breeding Base: */
 			troops-=5;
@@ -31,19 +32,22 @@ public class RadExp implements PlayerBot
 			
 			counter = 0;
 			
-			if(!universeView.belongsToMe(c.getUp()) || universeView.getPopulation(c.getUp()) < mine ){
+			if((!universeView.belongsToMe(c.getUp())) || universeView.getPopulation(c.getUp()) < mine ){
 				counter++;
 				go[0]++;
 			}
-			if(!universeView.belongsToMe(c.getLeft()) || universeView.getPopulation(c.getLeft()) < mine ){
+			
+			if((!universeView.belongsToMe(c.getLeft())) || universeView.getPopulation(c.getLeft()) < mine ){
 				counter++;
 				go[1]++;
 			}
-			if(!universeView.belongsToMe(c.getDown()) || universeView.getPopulation(c.getDown()) < mine ){
+			
+			if((!universeView.belongsToMe(c.getDown())) || universeView.getPopulation(c.getDown()) < mine ){
 				counter++;
 				go[2]++;
 			}
-			if(!universeView.belongsToMe(c.getRight()) || universeView.getPopulation(c.getRight()) < mine ){
+			
+			if((!universeView.belongsToMe(c.getRight())) || universeView.getPopulation(c.getRight()) < mine ){
 				counter++;
 				go[3]++;
 			}
@@ -52,11 +56,7 @@ public class RadExp implements PlayerBot
 			
 			if(troops<5) continue;
 			
-			if(go[0]==1){
-				list.add(new MovementCommand(c,MovementCommand.Direction.UP, troops));
-			}
-			
-			if(go[1]==1){
+			if(go[3]==1){
 				list.add(new MovementCommand(c,MovementCommand.Direction.RIGHT, troops));
 			}
 			
@@ -64,10 +64,17 @@ public class RadExp implements PlayerBot
 				list.add(new MovementCommand(c,MovementCommand.Direction.DOWN, troops));
 			}
 			
-			if(go[3]==1){
-				list.add(new MovementCommand(c,MovementCommand.Direction.RIGHT, troops));
+			
+			if(go[1]==1){
+				list.add(new MovementCommand(c,MovementCommand.Direction.LEFT, troops));
 			}
 			
+			
+			
+			
+			if(go[0]==1){
+				list.add(new MovementCommand(c,MovementCommand.Direction.UP, troops));
+			}
 			
 			
 			
