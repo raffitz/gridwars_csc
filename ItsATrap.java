@@ -17,6 +17,8 @@ public class ItsATrap implements PlayerBot
 	
 	private boolean deathmatch = false;
 	
+	private boolean escaping = false;
+	
 	private MovementCommand.Direction[] getOrder(Coordinates me, Coordinates target, int size){
 		int dx;
 		int dy;
@@ -29,7 +31,7 @@ public class ItsATrap implements PlayerBot
 		dy = target.getY() - me.getY();
 		dx = target.getX() - me.getX();
 		
-		if(deathmatch || dx*dx+dy*dy<=64){
+		if((!escaping) || deathmatch || dx*dx+dy*dy<=64){
 			
 			order = rng.nextInt(4);
 			
@@ -115,10 +117,18 @@ public class ItsATrap implements PlayerBot
 		
 		MovementCommand.Direction dirs[];
 		
-		if((universeView.getCurrentTurn()/25)%4 == 3){
+		if((!escaping) && (universeView.getCurrentTurn()/25)%4 == 3){
 			deathmatch = true;
 		}else{
 			deathmatch = false;
+		}
+		
+		if(universeView.getCurrentTurn()>50){
+			escaping = true;
+		}
+		
+		if(universeView.getCurrentTurn()>100){
+			escaping = false;
 		}
 		
 		for (Coordinates c : universeView.getMyCells()) {
