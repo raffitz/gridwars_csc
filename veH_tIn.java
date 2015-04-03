@@ -52,19 +52,19 @@ public class veH_tIn implements PlayerBot
 			}
 			
 			if((dy>0 && Math.abs(dy)<size/2) || (dy<0 && Math.abs(dy)>size/2)){
-				dirs[1] = MovementCommand.Direction.DOWN;
-				dirs[2] = MovementCommand.Direction.UP;
+				dirs[0] = MovementCommand.Direction.UP;
+				dirs[3] = MovementCommand.Direction.DOWN;
 			}else{
-				dirs[1] = MovementCommand.Direction.UP;
-				dirs[2] = MovementCommand.Direction.DOWN;
+				dirs[0] = MovementCommand.Direction.DOWN;
+				dirs[3] = MovementCommand.Direction.UP;
 			}
 		}else{
 			if((dy>0 && Math.abs(dy)<size/2) || (dy<0 && Math.abs(dy)>size/2)){
-				dirs[0] = MovementCommand.Direction.DOWN;
-				dirs[3] = MovementCommand.Direction.UP;
-			}else{
 				dirs[0] = MovementCommand.Direction.UP;
 				dirs[3] = MovementCommand.Direction.DOWN;
+			}else{
+				dirs[0] = MovementCommand.Direction.DOWN;
+				dirs[3] = MovementCommand.Direction.UP;
 			}
 			
 			if((dx>0 && Math.abs(dx)<size/2) || (dx<0 && Math.abs(dx)>size/2)){
