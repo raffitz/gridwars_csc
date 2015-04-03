@@ -1,3 +1,6 @@
+package examplebot;
+
+
 import cern.ais.gridwars.UniverseView;
 import cern.ais.gridwars.Coordinates;
 import cern.ais.gridwars.bot.PlayerBot;
@@ -12,7 +15,7 @@ public class ExampleBot implements PlayerBot
 {
 	
 	private Coordinates oi;
-	/*
+	private double d;
 	private double dist(UniverseView universeview){
 		int enemy_x=0, enemy_y=0, friend_x=0, friend_y=0;
 		
@@ -38,7 +41,7 @@ public class ExampleBot implements PlayerBot
 		
 		
 		return d;
-	}*/
+	}
 	/*private Coordinates myStartCoordinates(UniverseView universeview){
 		int size=  universeview.getUniverseSize();
 		Coordinates oi=universeview.getCoordinates(0, 0);;
@@ -58,7 +61,7 @@ public class ExampleBot implements PlayerBot
 	public static final long BATSIZE = 5;
 	public void getNextCommands(UniverseView universeView, List<MovementCommand> list){
 		
-		//double d=dist(universeView);
+		//
 	//	Coordinates start=myStartCoordinates(universeView);
 		int turn=universeView.getCurrentTurn();
 		if(turn==1){
@@ -75,9 +78,10 @@ public class ExampleBot implements PlayerBot
 				list.add(new MovementCommand(c, MovementCommand.Direction.LEFT, left));
 				list.add(new MovementCommand(c, MovementCommand.Direction.RIGHT, right));
 				oi=c;
+				d=dist(universeView);
 			}
 		}
-		else if(turn>1 && turn<5){
+		else if(turn>1 && turn<70){
 			for (Coordinates c : universeView.getMyCells()) {
 				int x=0,y=0, start_x=0,start_y=0;
 				long pop=universeView.getPopulation(c);
@@ -92,15 +96,15 @@ public class ExampleBot implements PlayerBot
 						list.add(new MovementCommand(c, MovementCommand.Direction.RIGHT, pop-5));
 					}
 					//left
-					if(x<start_x){
+					else if(x<start_x){
 						list.add(new MovementCommand(c, MovementCommand.Direction.LEFT, pop-5));
 					}
 					//up
-					if(y>start_y){
+					else if(y>=start_y){
 						list.add(new MovementCommand(c, MovementCommand.Direction.UP, pop-5));
 					}
 					//down
-					if(y<start_y){
+					else if(y<start_y){
 						list.add(new MovementCommand(c, MovementCommand.Direction.DOWN, pop-5));
 					}
 				}
