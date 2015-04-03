@@ -58,7 +58,7 @@ public class ExampleBot implements PlayerBot
 		double d=dist(universeView);
 	//	Coordinates start=myStartCoordinates(universeView);
 		int turn=universeView.getCurrentTurn();
-		if(turn==0){
+		if(turn==1){
 			for (Coordinates c : universeView.getMyCells()) {
 				long pop=universeView.getPopulation(c);
 				pop-=5;
@@ -74,7 +74,7 @@ public class ExampleBot implements PlayerBot
 				
 			}
 		}
-		else if(turn>0 || turn<d/5){
+		else if(turn>1 && turn<d/5){
 			for (Coordinates c : universeView.getMyCells()) {
 				int x=0,y=0, start_x=0,start_y=0;
 				long pop=universeView.getPopulation(c);
