@@ -7,7 +7,7 @@ import java.lang.*;
 import java.util.List;
 import java.util.Random;
 
-public class Escapatron implements PlayerBot
+public class BowTiesAreCool implements PlayerBot
 {
 	private static final long BATSIZE = 5;
 	
@@ -15,7 +15,7 @@ public class Escapatron implements PlayerBot
 	
 	private Coordinates origin;
 	
-	private boolean chasing = true;
+	private boolean deathmatch = false;
 	
 	private MovementCommand.Direction[] getOrder(Coordinates me, Coordinates target, int size){
 		int dx;
@@ -37,19 +37,19 @@ public class Escapatron implements PlayerBot
 			}
 			
 			if((dy>0 && Math.abs(dy)<size/2) || (dy<0 && Math.abs(dy)>size/2)){
-				dirs[1] = MovementCommand.Direction.DOWN;
-				dirs[2] = MovementCommand.Direction.UP;
-			}else{
 				dirs[1] = MovementCommand.Direction.UP;
 				dirs[2] = MovementCommand.Direction.DOWN;
+			}else{
+				dirs[1] = MovementCommand.Direction.DOWN;
+				dirs[2] = MovementCommand.Direction.UP;
 			}
 		}else{
 			if((dy>0 && Math.abs(dy)<size/2) || (dy<0 && Math.abs(dy)>size/2)){
-				dirs[0] = MovementCommand.Direction.DOWN;
-				dirs[3] = MovementCommand.Direction.UP;
-			}else{
 				dirs[0] = MovementCommand.Direction.UP;
 				dirs[3] = MovementCommand.Direction.DOWN;
+			}else{
+				dirs[0] = MovementCommand.Direction.DOWN;
+				dirs[3] = MovementCommand.Direction.UP;
 			}
 			
 			if((dx>0 && Math.abs(dx)<size/2) || (dx<0 && Math.abs(dx)>size/2)){
@@ -74,6 +74,10 @@ public class Escapatron implements PlayerBot
 		
 		MovementCommand.Direction dirs[];
 		
+		if((!deathmatch) && universeView.getCurrentTurn()>universeView.getTurnLimit()/4){
+			deathmatch = true;
+		}
+		
 		for (Coordinates c : universeView.getMyCells()) {
 		
 			if(first){
@@ -84,6 +88,24 @@ public class Escapatron implements PlayerBot
 		
 			troops = universeView.getPopulation(c);
 			
+			if(deathmatch){
+				if(!universeView.belongsToMe(c.getUp())){
+					list.add(new MovementCommand(c,MovementCommand.Direction.UP, troops));
+					continue;
+				}
+				if(!universeView.belongsToMe(c.getLeft())){
+					list.add(new MovementCommand(c,MovementCommand.Direction.LEFT, troops));
+					continue;
+				}
+				if(!universeView.belongsToMe(c.getRight())){
+					list.add(new MovementCommand(c,MovementCommand.Direction.RIGHT, troops));
+					continue;
+				}
+				if(!universeView.belongsToMe(c.getDown())){
+					list.add(new MovementCommand(c,MovementCommand.Direction.DOWN, troops));
+					continue;
+				}
+			}
 			/* Breeding Base: */
 			troops-=BATSIZE;
 			
