@@ -10,6 +10,8 @@ import java.util.Random;
 
 public class ExampleBot implements PlayerBot
 {
+	
+	private Coordinates oi;
 	/*
 	private double dist(UniverseView universeview){
 		int enemy_x=0, enemy_y=0, friend_x=0, friend_y=0;
@@ -72,7 +74,7 @@ public class ExampleBot implements PlayerBot
 				list.add(new MovementCommand(c, MovementCommand.Direction.DOWN, down));
 				list.add(new MovementCommand(c, MovementCommand.Direction.LEFT, left));
 				list.add(new MovementCommand(c, MovementCommand.Direction.RIGHT, right));
-				
+				oi=c;
 			}
 		}
 		else if(turn>1 && turn<5){
@@ -81,8 +83,8 @@ public class ExampleBot implements PlayerBot
 				long pop=universeView.getPopulation(c);
 				x=c.getX();
 				y=c.getY();
-				start_x=c.getX();
-				start_y=c.getY();
+				start_x=oi.getX();
+				start_y=oi.getY();
 				
 				if(pop>5){
 					//right
