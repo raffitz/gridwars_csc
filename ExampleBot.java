@@ -1,6 +1,3 @@
-package examplebot;
-
-
 import cern.ais.gridwars.UniverseView;
 import cern.ais.gridwars.Coordinates;
 import cern.ais.gridwars.bot.PlayerBot;
