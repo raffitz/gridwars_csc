@@ -27,7 +27,7 @@ public class BowTiesAreCool implements PlayerBot
 		dx = target.getX() - me.getX();
 		
 		
-		if(Math.abs(dx)>Math.abs(dy)){
+		if(Math.abs(dx)>=Math.abs(dy)){
 			if((dx>0 && Math.abs(dx)<size/2) || (dx<0 && Math.abs(dx)>size/2)){
 				dirs[0] = MovementCommand.Direction.LEFT;
 				dirs[3] = MovementCommand.Direction.RIGHT;
@@ -74,7 +74,7 @@ public class BowTiesAreCool implements PlayerBot
 		
 		MovementCommand.Direction dirs[];
 		
-		if((!deathmatch) && universeView.getCurrentTurn()>universeView.getTurnLimit()/4){
+		if((!deathmatch) && universeView.getCurrentTurn()>universeView.getTurnLimit()/20){
 			deathmatch = true;
 		}
 		
