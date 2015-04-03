@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class ExampleBot implements PlayerBot
 {
-	
+	/*
 	private double dist(UniverseView universeview){
 		int enemy_x=0, enemy_y=0, friend_x=0, friend_y=0;
 		
@@ -36,7 +36,7 @@ public class ExampleBot implements PlayerBot
 		
 		
 		return d;
-	}
+	}*/
 	/*private Coordinates myStartCoordinates(UniverseView universeview){
 		int size=  universeview.getUniverseSize();
 		Coordinates oi=universeview.getCoordinates(0, 0);;
@@ -52,10 +52,11 @@ public class ExampleBot implements PlayerBot
 		return oi;
 		
 	}*/
+	
 	public static final long BATSIZE = 5;
 	public void getNextCommands(UniverseView universeView, List<MovementCommand> list){
 		
-		double d=dist(universeView);
+		//double d=dist(universeView);
 	//	Coordinates start=myStartCoordinates(universeView);
 		int turn=universeView.getCurrentTurn();
 		if(turn==1){
@@ -74,7 +75,7 @@ public class ExampleBot implements PlayerBot
 				
 			}
 		}
-		else if(turn>1 && turn<d/5){
+		else if(turn>1 && turn<5){
 			for (Coordinates c : universeView.getMyCells()) {
 				int x=0,y=0, start_x=0,start_y=0;
 				long pop=universeView.getPopulation(c);
