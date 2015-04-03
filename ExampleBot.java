@@ -1,4 +1,4 @@
-package examplebot;
+
 
 
 import cern.ais.gridwars.UniverseView;
