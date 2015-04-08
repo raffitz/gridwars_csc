@@ -1,0 +1,3 @@
+[submodule "gridwars"]
+	path = gridwars
+	url = https://github.com/xSeagullx/gridwars
